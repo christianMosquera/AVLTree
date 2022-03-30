@@ -1,0 +1,497 @@
+        -:    0:Source:binary_search_tree.h
+        -:    0:Graph:binary_search_tree_tests.gcno
+        -:    0:Data:binary_search_tree_tests.gcda
+        -:    0:Runs:1
+        -:    1:#ifndef BINARY_SEARCH_TREE_H
+        -:    2:#define BINARY_SEARCH_TREE_H
+        -:    3:
+        -:    4:#include <cstddef>
+        -:    5:#include <iostream>
+        -:    6:
+        -:    7:/*****************************************************
+        -:    8: **
+        -:    9: ** File:    binary_search.h
+        -:   10: ** Project: CSCE 221 Lab 4 Spring 2022
+        -:   11: ** Author:  Christian Mosquera
+        -:   12: ** Date:    03/21/22
+        -:   13: ** Section: 510
+        -:   14: ** Email:   cwbo.1701@tamu.edu
+        -:   15: ** 
+        -:   16: ** This file contains all the functions for the 
+        -:   17: ** binary search tree data structure. It has public 
+        -:   18: ** functions that a user can call and it utilizes
+        -:   19: ** internal private functions to help with recursion.
+        -:   20: **
+        -:   21: *****************************************************/
+        -:   22:
+        -:   23:
+        -:   24:template <typename Comparable>
+        -:   25:struct Node {
+        -:   26:    Comparable value;
+        -:   27:    Node* left;
+        -:   28:    Node* right;
+        -:   29:    Node() : value(), left(nullptr), right(nullptr) {}
+      186:   30:    Node(Comparable value) : value(value), left(nullptr), right(nullptr) {}
+        -:   31:};
+        -:   32:
+        -:   33:template <typename Comparable>
+        -:   34:class BinarySearchTree {
+        -:   35:
+        -:   36:public:
+        -:   37:    BinarySearchTree();
+        -:   38:    BinarySearchTree(const BinarySearchTree& other);
+        -:   39:    ~BinarySearchTree();
+        -:   40:    BinarySearchTree& operator=(const BinarySearchTree& other);
+        -:   41:    bool contains(const Comparable& value) const;
+        -:   42:    void insert(const Comparable& value);
+        -:   43:    void remove(const Comparable& value);
+        -:   44:    const Comparable& find_min() const;
+        -:   45:    const Comparable& find_max() const;
+        -:   46:    void print_tree(std::ostream& os=std::cout) const;
+        -:   47:    bool is_empty() const;
+        -:   48:    void make_empty();
+        -:   49:
+        -:   50:private:
+        -:   51:    // data
+        -:   52:    Node<Comparable>* root;
+        -:   53:
+        -:   54:    // recursive functions
+        -:   55:    Node<Comparable>* recurse_find_max(Node<Comparable>* node) const;
+        -:   56:    Node<Comparable>* recurse_find_min(Node<Comparable>* node) const;
+        -:   57:    void insertRecurse(const Comparable& value, Node<Comparable>* &currNode);
+        -:   58:    void preorderInsert(Node<Comparable>* current);
+        -:   59:    void removeRecurse(const Comparable& value, Node<Comparable>* &current);
+        -:   60:    void printRecurse(Node<Comparable>* node, int count, std::ostream& os=std::cout) const;
+        -:   61:    bool containRecurse(Node<Comparable>* node, const Comparable& value) const;
+        -:   62:    void emptyRecurse(Node<Comparable>* &node);
+        -:   63:
+        -:   64:};
+        -:   65:
+        -:   66:
+        -:   67://---------------------------------------
+        -:   68:// Name: Defalut Constructor
+        -:   69://---------------------------------------
+        -:   70:template <typename Comparable>
+       12:   71:BinarySearchTree<Comparable>::BinarySearchTree() : root(nullptr) {}
+        -:   72:
+        -:   73:
+        -:   74:
+        -:   75://---------------------------------------
+        -:   76:// Name: Copy Constructor
+        -:   77:// PreCondition:  other tree is given
+        -:   78:// PostCondition: A deep copied second tree
+        -:   79://---------------------------------------
+        -:   80:template <typename Comparable>
+        6:   81:BinarySearchTree<Comparable>::BinarySearchTree(const BinarySearchTree& other) : root(nullptr) {
+        -:   82:
+        -:   83:    // preorder traversal to copy
+        6:   84:    if (other.root != nullptr) {
+        5:   85:        this->preorderInsert(other.root);
+        -:   86:    }
+        -:   87:
+        6:   88:}
+        -:   89:
+        -:   90:
+        -:   91:
+        -:   92://---------------------------------------
+        -:   93:// Name: Destructor
+        -:   94://---------------------------------------
+        -:   95:template <typename Comparable>
+       18:   96:BinarySearchTree<Comparable>::~BinarySearchTree() {
+        -:   97:
+       18:   98:    make_empty();
+        -:   99:
+       18:  100:}
+        -:  101:
+        -:  102:
+        -:  103:
+        -:  104://---------------------------------------
+        -:  105:// Name: Copy assignment
+        -:  106:// PreCondition:  other is given
+        -:  107:// PostCondition: A deep copied tree
+        -:  108://---------------------------------------
+        -:  109:template <typename Comparable>
+        4:  110:BinarySearchTree<Comparable>& BinarySearchTree<Comparable>::operator=(const BinarySearchTree& other) {
+        -:  111:
+        -:  112:    // If this is the same as other
+        4:  113:    if (this == &other) {
+        1:  114:        return *this;
+        -:  115:    }
+        -:  116:
+        -:  117:    // make this empty first
+        3:  118:    this->make_empty();
+        -:  119:
+        -:  120:    // if other is empty
+        3:  121:    if (other.root == nullptr) {
+        2:  122:        this->root = nullptr;
+        2:  123:        return *this;
+        -:  124:    }
+        -:  125:
+        -:  126:    // if other is non empty
+        1:  127:    this->preorderInsert(other.root);
+        1:  128:    return *this;
+        -:  129:}
+        -:  130:
+        -:  131:
+        -:  132:
+        -:  133://---------------------------------------
+        -:  134:// Name: contains
+        -:  135:// PreCondition: Value is comparable
+        -:  136:// PostCondition: Returns if value is in binary tree
+        -:  137://---------------------------------------
+        -:  138:template <typename Comparable>
+       54:  139:bool BinarySearchTree<Comparable>::contains(const Comparable& value) const {
+       54:  140:    return containRecurse(root, value);
+        -:  141:}
+        -:  142:
+        -:  143:
+        -:  144:
+        -:  145://---------------------------------------
+        -:  146:// Name: containRecurse
+        -:  147:// PreCondition:  Node is not nullptr and value is comparable
+        -:  148:// PostCondition: Returns if value is in binary tree
+        -:  149://---------------------------------------
+        -:  150:template <typename Comparable>
+      257:  151:bool BinarySearchTree<Comparable>::containRecurse(Node<Comparable>* node, const Comparable& value) const {
+        -:  152:
+        -:  153:    // nullptr base case
+      257:  154:    if (node) {
+        -:  155:
+        -:  156:        // found
+      223:  157:        if (node->value == value) {
+       20:  158:            return true;
+        -:  159:        }
+        -:  160:
+        -:  161:        // left sub tree
+      203:  162:        else if (value < node->value) {
+      110:  163:            return containRecurse(node->left, value);
+        -:  164:        }
+        -:  165:
+        -:  166:        // right sub tree
+       93:  167:        else if (value > node->value) {
+       93:  168:            return containRecurse(node->right, value);
+        -:  169:        }
+        -:  170:    }
+        -:  171:    
+        -:  172:    // goes through tree, not found
+       34:  173:    return false;
+        -:  174:
+        -:  175:}
+        -:  176:
+        -:  177:
+        -:  178:
+        -:  179://---------------------------------------
+        -:  180:// Name: insert
+        -:  181:// PreCondition:  Value is comparable
+        -:  182:// PostCondition: Node inserted into the binary tree
+        -:  183://---------------------------------------
+        -:  184:template <typename Comparable>
+      195:  185:void BinarySearchTree<Comparable>::insert(const Comparable& value) {
+        -:  186:
+      195:  187:    insertRecurse(value, this->root);
+        -:  188:
+      195:  189:}
+        -:  190:
+        -:  191:
+        -:  192:
+        -:  193://---------------------------------------
+        -:  194:// Name: insertRecurse
+        -:  195:// PreCondition:  Value is comparable
+        -:  196:// PostCondition: Node inserted into the binary tree
+        -:  197://---------------------------------------
+        -:  198:template <typename Comparable>
+      821:  199:void BinarySearchTree<Comparable>::insertRecurse(const Comparable& value, Node<Comparable>* &currNode) {
+        -:  200:
+        -:  201:    // base case
+      821:  202:    if (currNode == nullptr) {
+      186:  203:        currNode = new Node<Comparable>(value);
+      186:  204:        return;
+        -:  205:    }
+        -:  206:
+        -:  207:    // left sub tree
+      635:  208:    if (value < currNode->value) {
+      305:  209:        insertRecurse(value, currNode->left);
+        -:  210:    }
+        -:  211:
+        -:  212:    // right sub tree
+      330:  213:    else if (value > currNode->value) {
+      321:  214:        insertRecurse(value, currNode->right);   
+        -:  215:    }
+        -:  216:    
+        -:  217:}
+        -:  218:
+        -:  219:
+        -:  220:
+        -:  221://---------------------------------------
+        -:  222:// Name: remove
+        -:  223:// PreCondition:  Value is comparable
+        -:  224:// PostCondition: Removes the value from the tree
+        -:  225://---------------------------------------
+        -:  226:template <typename Comparable>
+        6:  227:void BinarySearchTree<Comparable>::remove(const Comparable& value) {
+        -:  228:
+        6:  229:    removeRecurse(value, this->root);
+        -:  230:
+        6:  231:}
+        -:  232:
+        -:  233:
+        -:  234:
+        -:  235://---------------------------------------
+        -:  236:// Name: removeRecurse
+        -:  237:// PreCondition:  Value is comparable
+        -:  238:// PostCondition: Removes the value from the tree
+        -:  239://---------------------------------------
+        -:  240:template <typename Comparable>
+       23:  241:void BinarySearchTree<Comparable>::removeRecurse(const Comparable& value, Node<Comparable>* &current) {
+        -:  242:
+        -:  243:    // nullptr base case
+       23:  244:    if (!current) {
+        1:  245:        return;
+        -:  246:    }
+        -:  247:
+        -:  248:    // found the value
+       22:  249:    if (value == current->value) {
+        -:  250:
+        -:  251:        // case 1: leaf node
+        7:  252:        if (current->left == nullptr && current->right == nullptr) {
+        3:  253:            delete current;
+        3:  254:            current = nullptr;
+        -:  255:        }
+        -:  256:
+        -:  257:        // case 2: right sub tree and left sub tree
+        4:  258:        else if (current->left && current->right) {
+        -:  259:
+        -:  260:            // Find max in left sub tree
+        2:  261:            Node<Comparable>* minRight = recurse_find_min(current->right);
+        2:  262:            current->value = minRight->value;
+        2:  263:            removeRecurse(minRight->value, current->right);
+        -:  264:
+        -:  265:        }
+        -:  266:
+        -:  267:        // case 3: right sub tree or left sub tree
+        2:  268:        else if (current->right || current->left) {
+        -:  269:
+        2:  270:            Node<Comparable>* temp = current;
+        -:  271:
+        -:  272:            // right sub tree
+        2:  273:            if (current->right) {
+        1:  274:                current = current->right;
+        1:  275:                delete temp;
+        -:  276:            }
+        -:  277:
+        -:  278:            // left sub tree
+        -:  279:            else {
+        1:  280:                current = current->left;
+        1:  281:                delete temp;
+        -:  282:            }
+        -:  283:        }
+        -:  284:    }
+        -:  285:
+       15:  286:    else if (value < current->value) {
+        3:  287:        removeRecurse(value, current->left);
+        -:  288:    }
+        -:  289:
+        -:  290:    else {
+       12:  291:        removeRecurse(value, current->right);
+        -:  292:    }
+        -:  293:    
+        -:  294:}
+        -:  295:
+        -:  296:
+        -:  297:
+        -:  298://---------------------------------------
+        -:  299:// Name: find_min
+        -:  300:// PreCondition:  Binary tree exists
+        -:  301:// PostCondition: Returns the minimum value
+        -:  302://---------------------------------------
+        -:  303:template <typename Comparable>
+        9:  304:const Comparable& BinarySearchTree<Comparable>::find_min() const {
+        -:  305:
+        9:  306:    Node<Comparable>* node = recurse_find_min(this->root);
+        8:  307:    return node->value;
+        -:  308:
+        -:  309:}
+        -:  310:
+        -:  311:
+        -:  312:
+        -:  313://---------------------------------------
+        -:  314:// Name: recurse_find_min
+        -:  315:// PreCondition:  Binary tree exists
+        -:  316:// PostCondition: Returns the minimum value
+        -:  317://---------------------------------------
+        -:  318:template <typename Comparable>
+       11:  319:Node<Comparable>* BinarySearchTree<Comparable>::recurse_find_min(Node<Comparable>* node) const {
+        -:  320:
+        -:  321:    // Throws error if the tree is empty
+       11:  322:    if (!node) {
+        1:  323:        throw std::invalid_argument("Tree is empty, no minimum value.");
+        -:  324:    }
+        -:  325:
+        -:  326:    // Traverse all the way to the left
+       31:  327:    while (node->left != nullptr) {
+       21:  328:        node = node->left;
+        -:  329:    }
+        -:  330:
+       10:  331:    return node;
+        -:  332:
+        -:  333:}
+        -:  334:
+        -:  335:
+        -:  336:
+        -:  337://---------------------------------------
+        -:  338:// Name: find_max
+        -:  339:// PreCondition:  Binary tree exists
+        -:  340:// PostCondition: Returns maximum value
+        -:  341://---------------------------------------
+        -:  342:template <typename Comparable>
+        9:  343:const Comparable& BinarySearchTree<Comparable>::find_max() const {
+        -:  344:
+        9:  345:    Node<Comparable>* node = recurse_find_max(this->root);
+        8:  346:    return node->value;
+        -:  347:
+        -:  348:}
+        -:  349:
+        -:  350:
+        -:  351:
+        -:  352://---------------------------------------
+        -:  353:// Name: recurse_find_max
+        -:  354:// PreCondition:  Binary tree exists
+        -:  355:// PostCondition: Returns maximum value
+        -:  356://---------------------------------------
+        -:  357:template <typename Comparable>
+        9:  358:Node<Comparable>* BinarySearchTree<Comparable>::recurse_find_max(Node<Comparable>* node) const {
+        -:  359:
+        -:  360:    // Throws error if the tree is empty
+        9:  361:    if (!node) {
+        1:  362:        throw std::invalid_argument("Tree is empty, no maximum value.");
+        -:  363:    }
+        -:  364:
+        -:  365:    // Traverse all the way to the right
+       31:  366:    while (node->right != nullptr) {
+       23:  367:        node = node->right;
+        -:  368:    }
+        -:  369:
+        8:  370:    return node;
+        -:  371:
+        -:  372:}
+        -:  373:
+        -:  374:
+        -:  375:
+        -:  376://---------------------------------------
+        -:  377:// Name: print_tree
+        -:  378:// PreCondition:  Tree exists
+        -:  379:// PostCondition: Outputs to the os stream that is specified
+        -:  380://---------------------------------------
+        -:  381:template <typename Comparable>
+       24:  382:void BinarySearchTree<Comparable>::print_tree(std::ostream& os) const {
+       24:  383:    if (this->root == nullptr) {
+        6:  384:        os << "<empty>" << std::endl;
+        -:  385:    }
+       24:  386:    int count = -1;
+       24:  387:    printRecurse(root, count, os);
+       24:  388:}
+        -:  389:
+        -:  390:
+        -:  391:
+        -:  392://---------------------------------------
+        -:  393:// Name: printRecurse
+        -:  394:// PreCondition:  Tree exists
+        -:  395:// PostCondition: Outputs to the os stream
+        -:  396://---------------------------------------
+        -:  397:template <typename Comparable>
+      416:  398:void BinarySearchTree<Comparable>::printRecurse(Node<Comparable>* node, int count, std::ostream& os) const 
+        -:  399:{
+        -:  400:    // base case nullptr
+      416:  401:    if (node) {
+        -:  402:
+        -:  403:        // keeps count of the depth
+      196:  404:        count++;
+        -:  405:
+      196:  406:        printRecurse(node->right, count, os);
+        -:  407:
+        -:  408:        // prints out the appropiate amount of spacing
+      196:  409:        if (node != root) {
+     1424:  410:            for (int i = 0; i < count*2; i++) {
+     1246:  411:                os << " ";
+        -:  412:            }
+        -:  413:        }
+        -:  414:        
+      196:  415:        os << node->value << std::endl;
+      196:  416:        printRecurse(node->left, count, os);
+        -:  417:    }
+      416:  418:}
+        -:  419:
+        -:  420:
+        -:  421:
+        -:  422://---------------------------------------
+        -:  423:// Name: is_empty
+        -:  424:// PreCondition:  N/A
+        -:  425:// PostCondition: Returns true if root is nullptr
+        -:  426://---------------------------------------
+        -:  427:template <typename Comparable>
+        6:  428:bool BinarySearchTree<Comparable>::is_empty() const {
+        -:  429:
+        6:  430:    return (root == nullptr);
+        -:  431:
+        -:  432:}
+        -:  433:
+        -:  434:
+        -:  435:
+        -:  436://---------------------------------------
+        -:  437:// Name: make_empty
+        -:  438:// PreCondition:  Tree exists
+        -:  439:// PostCondition: All nodes from tree are removed
+        -:  440://---------------------------------------
+        -:  441:template <typename Comparable>
+       24:  442:void BinarySearchTree<Comparable>::make_empty() {
+        -:  443:
+       24:  444:    emptyRecurse(root);
+        -:  445:
+       24:  446:}
+        -:  447:
+        -:  448:
+        -:  449:
+        -:  450://---------------------------------------
+        -:  451:// Name: emptyRecurse
+        -:  452:// PreCondition:  Tree exists
+        -:  453:// PostCondition: All nodes from tree are removed
+        -:  454://---------------------------------------
+        -:  455:template <typename Comparable>
+      386:  456:void BinarySearchTree<Comparable>::emptyRecurse(Node<Comparable>* &node) {
+        -:  457:
+        -:  458:    // base case for null
+      386:  459:    if (node) {
+        -:  460:
+      181:  461:        emptyRecurse(node->left);
+      181:  462:        emptyRecurse(node->right);
+      181:  463:        delete node;
+        -:  464:
+        -:  465:    }
+        -:  466:
+      386:  467:    node = nullptr;
+        -:  468:
+      386:  469:}
+        -:  470:
+        -:  471:
+        -:  472:
+        -:  473://---------------------------------------
+        -:  474:// Name: preorderInsert
+        -:  475:// PreCondition:  Current is not nullptr
+        -:  476:// PostCondition: A fully inserted binary search tree
+        -:  477://---------------------------------------
+        -:  478:template <typename Comparable>
+      168:  479:void BinarySearchTree<Comparable>::preorderInsert(Node<Comparable>* current) {
+        -:  480:
+        -:  481:    // base case if null
+      168:  482:    if (current) {
+       81:  483:        this->insert(current->value);
+       81:  484:        this->preorderInsert(current->left);
+       81:  485:        this->preorderInsert(current->right);
+        -:  486:    }
+        -:  487:
+      168:  488:    return;
+        -:  489:
+        -:  490:}
+        -:  491:
+        -:  492:
+        -:  493:#endif

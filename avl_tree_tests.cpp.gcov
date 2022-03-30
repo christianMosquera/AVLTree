@@ -1,0 +1,789 @@
+        -:    0:Source:avl_tree_tests.cpp
+        -:    0:Graph:avl_tree_tests.gcno
+        -:    0:Data:avl_tree_tests.gcda
+        -:    0:Runs:1
+        -:    1:#include <iostream>
+        -:    2:#include "avl_tree.h"
+        -:    3:
+        -:    4:using std::cout, std::endl;
+        -:    5:
+        -:    6:/*****************************************************
+        -:    7: **
+        -:    8: ** File:    avl_tree_tests.cpp
+        -:    9: ** Project: CSCE 221 Lab 4 Spring 2022
+        -:   10: ** Author:  Christian Mosquera
+        -:   11: ** Date:    03/21/22
+        -:   12: ** Section: 510
+        -:   13: ** Email:   cwbo.1701@tamu.edu
+        -:   14: ** 
+        -:   15: ** This file contains function calls to the avl tree
+        -:   16: ** data structure to test all the functions associated 
+        -:   17: ** with it.
+        -:   18: **
+        -:   19: *****************************************************/
+        -:   20:
+        1:   21:int main() {
+        -:   22:    
+        -:   23:
+        -:   24:    //----------------------------------
+        -:   25:    //
+        -:   26:    // TEST NUMBER 1
+        -:   27:    // Purpose: Test default constructor, 
+        -:   28:    // insert and print. Print out each
+        -:   29:    // step of inserting.
+        -:   30:    //
+        -:   31:    //----------------------------------
+        -:   32:
+        1:   33:    cout << endl << "//----------------------------------" << endl << "//" << endl;
+        1:   34:    cout << "// TEST NUMBER 1" << endl;
+        1:   35:    cout << "// Purpose: Test default constructor," << endl << "// insert and print. Print out each";
+        1:   36:    cout << endl << "// step of inserting." << endl <<"//" << endl;
+        1:   37:    cout << "//----------------------------------" << endl << endl;
+        -:   38:
+        -:   39:
+        2:   40:    AVLTree<int> avl1;
+        -:   41:
+        -:   42:    // Inserting different elements causing shifts
+        1:   43:    cout << "// Inserting 10" << endl;
+        1:   44:    cout << "--------------------------" << endl;
+        1:   45:    avl1.insert(10);
+        1:   46:    avl1.print_tree();
+        1:   47:    cout << "--------------------------" << endl;
+        1:   48:    cout << endl;
+        -:   49:
+        1:   50:    cout << "// Inserting 15" << endl;
+        1:   51:    cout << "--------------------------" << endl;
+        1:   52:    avl1.insert(15);
+        1:   53:    avl1.print_tree();
+        1:   54:    cout << "--------------------------" << endl;
+        1:   55:    cout << endl;
+        -:   56:
+        1:   57:    cout << "// Inserting 20" << endl;
+        1:   58:    cout << "--------------------------" << endl;
+        1:   59:    avl1.insert(20);
+        1:   60:    avl1.print_tree();
+        1:   61:    cout << "--------------------------" << endl;
+        1:   62:    cout << endl;
+        -:   63:
+        1:   64:    cout << "// Inserting 16" << endl;
+        1:   65:    cout << "--------------------------" << endl;
+        1:   66:    avl1.insert(16);
+        1:   67:    avl1.print_tree();
+        1:   68:    cout << "--------------------------" << endl;
+        1:   69:    cout << endl;
+        -:   70:
+        1:   71:    cout << "// Inserting 17" << endl;
+        1:   72:    cout << "--------------------------" << endl;
+        1:   73:    avl1.insert(17);
+        1:   74:    avl1.print_tree();
+        1:   75:    cout << "--------------------------" << endl;
+        1:   76:    cout << endl;
+        -:   77:
+        1:   78:    cout << "// Inserting 18" << endl;
+        1:   79:    cout << "--------------------------" << endl;
+        1:   80:    avl1.insert(18);
+        1:   81:    avl1.print_tree();
+        1:   82:    cout << "--------------------------" << endl;
+        1:   83:    cout << endl;
+        -:   84:
+        1:   85:    cout << "// Inserting 19" << endl;
+        1:   86:    cout << "--------------------------" << endl;
+        1:   87:    avl1.insert(19);
+        1:   88:    avl1.print_tree();
+        1:   89:    cout << "--------------------------" << endl;
+        1:   90:    cout << endl;
+        -:   91:
+        1:   92:    cout << "// Inserting -23" << endl;
+        1:   93:    cout << "--------------------------" << endl;
+        1:   94:    avl1.insert(-23);
+        1:   95:    avl1.print_tree();
+        1:   96:    cout << "--------------------------" << endl;
+        1:   97:    cout << endl;
+        -:   98:
+        1:   99:    cout << "// Inserting -50" << endl;
+        1:  100:    cout << "--------------------------" << endl;
+        1:  101:    avl1.insert(-50);
+        1:  102:    avl1.print_tree();
+        1:  103:    cout << "--------------------------" << endl;
+        1:  104:    cout << endl;
+        -:  105:
+        1:  106:    cout << "// Inserting -2" << endl;
+        1:  107:    cout << "--------------------------" << endl;
+        1:  108:    avl1.insert(-2);
+        1:  109:    avl1.print_tree();
+        1:  110:    cout << "--------------------------" << endl;
+        1:  111:    cout << endl;
+        -:  112:
+        1:  113:    cout << "// Inserting -1" << endl;
+        1:  114:    cout << "--------------------------" << endl;
+        1:  115:    avl1.insert(-1);
+        1:  116:    avl1.print_tree();
+        1:  117:    cout << "--------------------------" << endl;
+        1:  118:    cout << endl;
+        -:  119:
+        1:  120:    cout << "// Inserting 0" << endl;
+        1:  121:    cout << "--------------------------" << endl;
+        1:  122:    avl1.insert(0);
+        1:  123:    avl1.print_tree();
+        1:  124:    cout << "--------------------------" << endl;
+        1:  125:    cout << endl;
+        -:  126:
+        1:  127:    cout << "// Inserting -10" << endl;
+        1:  128:    cout << "--------------------------" << endl;
+        1:  129:    avl1.insert(-10);
+        1:  130:    avl1.print_tree();
+        1:  131:    cout << "--------------------------" << endl;
+        1:  132:    cout << endl;
+        -:  133:
+        1:  134:    cout << "// Inserting -15" << endl;
+        1:  135:    cout << "--------------------------" << endl;
+        1:  136:    avl1.insert(-15);
+        1:  137:    avl1.print_tree();
+        1:  138:    cout << "--------------------------" << endl;
+        1:  139:    cout << endl;
+        -:  140:
+        -:  141:
+        -:  142:
+        -:  143:
+        -:  144:    //----------------------------------
+        -:  145:    //
+        -:  146:    // TEST NUMBER 2
+        -:  147:    // Purpose: Test copy constructor, 
+        -:  148:    // remove, make_empty and print. Print
+        -:  149:    // out each step of removing.
+        -:  150:    //
+        -:  151:    //----------------------------------
+        -:  152:
+        1:  153:    cout << endl << "//----------------------------------" << endl << "//" << endl;
+        1:  154:    cout << "// TEST NUMBER 2" << endl;
+        1:  155:    cout << "// Purpose: Test copy constructor," << endl << "// remove, make_empty and print. Print";
+        1:  156:    cout << endl << "// out each step of removing." << endl <<"//" << endl;
+        1:  157:    cout << "//----------------------------------" << endl << endl;
+        -:  158:
+        -:  159:
+        2:  160:    AVLTree<int> avl2(avl1);
+        -:  161:
+        -:  162:
+        -:  163:    // removing elements
+        1:  164:    cout << "// Starting tree" << endl;
+        1:  165:    cout << "--------------------------" << endl;
+        1:  166:    avl2.print_tree();
+        1:  167:    cout << "--------------------------" << endl;
+        1:  168:    cout << endl;
+        -:  169:
+        1:  170:    cout << "// Removing 25" << endl;
+        1:  171:    cout << "--------------------------" << endl;
+        1:  172:    avl2.remove(25);
+        1:  173:    avl2.print_tree();
+        1:  174:    cout << "--------------------------" << endl;
+        1:  175:    cout << endl;
+        -:  176:
+        1:  177:    cout << "// Removing 10" << endl;
+        1:  178:    cout << "--------------------------" << endl;
+        1:  179:    avl2.remove(10);
+        1:  180:    avl2.print_tree();
+        1:  181:    cout << "--------------------------" << endl;
+        1:  182:    cout << endl;
+        -:  183:
+        1:  184:    cout << "// Removing 20" << endl;
+        1:  185:    cout << "--------------------------" << endl;
+        1:  186:    avl2.remove(20);
+        1:  187:    avl2.print_tree();
+        1:  188:    cout << "--------------------------" << endl;
+        1:  189:    cout << endl;
+        -:  190:
+        1:  191:    cout << "// Removing 16" << endl;
+        1:  192:    cout << "--------------------------" << endl;
+        1:  193:    avl2.remove(16);
+        1:  194:    avl2.print_tree();
+        1:  195:    cout << "--------------------------" << endl;
+        1:  196:    cout << endl;
+        -:  197:
+        1:  198:    cout << "// Removing 17" << endl;
+        1:  199:    cout << "--------------------------" << endl;
+        1:  200:    avl2.remove(17);
+        1:  201:    avl2.print_tree();
+        1:  202:    cout << "--------------------------" << endl;
+        1:  203:    cout << endl;
+        -:  204:
+        1:  205:    cout << "// Removing 18" << endl;
+        1:  206:    cout << "--------------------------" << endl;
+        1:  207:    avl2.remove(18);
+        1:  208:    avl2.print_tree();
+        1:  209:    cout << "--------------------------" << endl;
+        1:  210:    cout << endl;
+        -:  211:
+        1:  212:    cout << "// Removing 15" << endl;
+        1:  213:    cout << "--------------------------" << endl;
+        1:  214:    avl2.remove(15);
+        1:  215:    avl2.print_tree();
+        1:  216:    cout << "--------------------------" << endl;
+        1:  217:    cout << endl;
+        -:  218:
+        1:  219:    cout << "// Removing 19" << endl;
+        1:  220:    cout << "--------------------------" << endl;
+        1:  221:    avl2.remove(19);
+        1:  222:    avl2.print_tree();
+        1:  223:    cout << "--------------------------" << endl;
+        1:  224:    cout << endl;
+        -:  225:
+        1:  226:    cout << "// Making empty" << endl;
+        1:  227:    cout << "--------------------------" << endl;
+        1:  228:    avl2.make_empty();
+        1:  229:    avl2.print_tree();
+        1:  230:    cout << "--------------------------" << endl;
+        1:  231:    cout << endl;
+        -:  232:
+        -:  233:
+        -:  234:
+        -:  235:
+        -:  236:
+        -:  237:
+        -:  238:    //----------------------------------
+        -:  239:    //
+        -:  240:    // TEST NUMBER 3
+        -:  241:    // Purpose: Test copy assignment, 
+        -:  242:    // remove, insert and print. Print
+        -:  243:    // out each step.
+        -:  244:    //
+        -:  245:    //----------------------------------
+        -:  246:
+        -:  247:
+        2:  248:    AVLTree<int> avl3;
+        -:  249:
+        1:  250:    cout << endl << "//----------------------------------" << endl << "//" << endl;
+        1:  251:    cout << "// TEST NUMBER 3" << endl;
+        1:  252:    cout << "// Purpose: Test copy assignment," << endl << "// remove, insert, and print. Print";
+        1:  253:    cout << endl << "// out each step." << endl <<"//" << endl;
+        1:  254:    cout << "//----------------------------------" << endl << endl;
+        -:  255:
+        -:  256:
+        1:  257:    cout << "// Inserting 1" << endl;
+        1:  258:    cout << "--------------------------" << endl;
+        1:  259:    avl3.insert(1);
+        1:  260:    avl3.print_tree();
+        1:  261:    cout << "--------------------------" << endl;
+        1:  262:    cout << endl;
+        -:  263:
+        1:  264:    cout << "// Inserting 5" << endl;
+        1:  265:    cout << "--------------------------" << endl;
+        1:  266:    avl3.insert(5);
+        1:  267:    avl3.print_tree();
+        1:  268:    cout << "--------------------------" << endl;
+        1:  269:    cout << endl;
+        -:  270:
+        1:  271:    cout << "// Inserting 65" << endl;
+        1:  272:    cout << "--------------------------" << endl;
+        1:  273:    avl3.insert(65);
+        1:  274:    avl3.print_tree();
+        1:  275:    cout << "--------------------------" << endl;
+        1:  276:    cout << endl;
+        -:  277:
+        1:  278:    cout << "// Inserting 21" << endl;
+        1:  279:    cout << "--------------------------" << endl;
+        1:  280:    avl3.insert(21);
+        1:  281:    avl3.print_tree();
+        1:  282:    cout << "--------------------------" << endl;
+        1:  283:    cout << endl;
+        -:  284:
+        1:  285:    cout << "// Inserting 72" << endl;
+        1:  286:    cout << "--------------------------" << endl;
+        1:  287:    avl3.insert(72);
+        1:  288:    avl3.print_tree();
+        1:  289:    cout << "--------------------------" << endl;
+        1:  290:    cout << endl;
+        -:  291:
+        1:  292:    cout << "// Inserting -9" << endl;
+        1:  293:    cout << "--------------------------" << endl;
+        1:  294:    avl3.insert(-9);
+        1:  295:    avl3.print_tree();
+        1:  296:    cout << "--------------------------" << endl;
+        1:  297:    cout << endl;
+        -:  298:
+        1:  299:    cout << "// Inserting -29" << endl;
+        1:  300:    cout << "--------------------------" << endl;
+        1:  301:    avl3.insert(-29);
+        1:  302:    avl3.print_tree();
+        1:  303:    cout << "--------------------------" << endl;
+        1:  304:    cout << endl;
+        -:  305:
+        1:  306:    cout << "// Inserting -54" << endl;
+        1:  307:    cout << "--------------------------" << endl;
+        1:  308:    avl3.insert(-54);
+        1:  309:    avl3.print_tree();
+        1:  310:    cout << "--------------------------" << endl;
+        1:  311:    cout << endl;
+        -:  312:
+        1:  313:    cout << "// Inserting 0" << endl;
+        1:  314:    cout << "--------------------------" << endl;
+        1:  315:    avl3.insert(0);
+        1:  316:    avl3.print_tree();
+        1:  317:    cout << "--------------------------" << endl;
+        1:  318:    cout << endl;
+        -:  319:
+        1:  320:    cout << "// Inserting 34" << endl;
+        1:  321:    cout << "--------------------------" << endl;
+        1:  322:    avl3.insert(34);
+        1:  323:    avl3.print_tree();
+        1:  324:    cout << "--------------------------" << endl;
+        1:  325:    cout << endl;
+        -:  326:
+        1:  327:    cout << "// Inserting 65" << endl;
+        1:  328:    cout << "--------------------------" << endl;
+        1:  329:    avl3.insert(65);
+        1:  330:    avl3.print_tree();
+        1:  331:    cout << "--------------------------" << endl;
+        1:  332:    cout << endl;
+        -:  333:
+        1:  334:    cout << "// Inserting 90" << endl;
+        1:  335:    cout << "--------------------------" << endl;
+        1:  336:    avl3.insert(90);
+        1:  337:    avl3.print_tree();
+        1:  338:    cout << "--------------------------" << endl;
+        1:  339:    cout << endl;
+        -:  340:
+        1:  341:    cout << "// Self assignment" << endl;
+        1:  342:    cout << "--------------------------" << endl;
+        1:  343:    avl3 = avl3;
+        1:  344:    avl3.print_tree();
+        1:  345:    cout << "--------------------------" << endl;
+        1:  346:    cout << endl;
+        -:  347:
+        1:  348:    cout << "// avl3 = avl1" << endl;
+        1:  349:    cout << "--------------------------" << endl;
+        1:  350:    avl3 = avl1;
+        1:  351:    avl3.print_tree();
+        1:  352:    cout << "--------------------------" << endl;
+        1:  353:    cout << endl;
+        -:  354:
+        1:  355:    cout << "// avl3 = avl2" << endl;
+        1:  356:    cout << "--------------------------" << endl;
+        1:  357:    avl3 = avl2;
+        1:  358:    avl3.print_tree();
+        1:  359:    cout << "--------------------------" << endl;
+        1:  360:    cout << endl;
+        -:  361:
+        1:  362:    cout << "// Insert 0" << endl;
+        1:  363:    cout << "--------------------------" << endl;
+        1:  364:    avl3.insert(0);
+        1:  365:    avl3.print_tree();
+        1:  366:    cout << "--------------------------" << endl;
+        1:  367:    cout << endl;
+        -:  368:
+        -:  369:
+        -:  370:
+        -:  371:
+        -:  372:
+        -:  373:    //----------------------------------
+        -:  374:    //
+        -:  375:    // TEST NUMBER 4
+        -:  376:    // Purpose: Test default constructor, 
+        -:  377:    // insert, contains, and print. Print 
+        -:  378:    // out each step of inserting.
+        -:  379:    //
+        -:  380:    //----------------------------------
+        -:  381:
+        1:  382:    cout << endl << "//----------------------------------" << endl << "//" << endl;
+        1:  383:    cout << "// TEST NUMBER 4" << endl;
+        1:  384:    cout << "// Purpose: Test default constructor," << endl << "// insert, contains, and print. Print";
+        1:  385:    cout << endl << "// out each step of inserting." << endl <<"//" << endl;
+        1:  386:    cout << "//----------------------------------" << endl << endl;
+        -:  387:
+        2:  388:    AVLTree<int> avl4;
+        -:  389:
+        -:  390:
+        1:  391:    cout << "// Inserting 10" << endl;
+        1:  392:    cout << "--------------------------" << endl;
+        1:  393:    avl4.insert(10);
+        1:  394:    avl4.print_tree();
+        1:  395:    cout << "--------------------------" << endl;
+        1:  396:    cout << endl;
+        -:  397:
+        1:  398:    cout << "// Inserting 101" << endl;
+        1:  399:    cout << "--------------------------" << endl;
+        1:  400:    avl4.insert(101);
+        1:  401:    avl4.print_tree();
+        1:  402:    cout << "--------------------------" << endl;
+        1:  403:    cout << endl;
+        -:  404:
+        1:  405:    cout << "// Inserting 20" << endl;
+        1:  406:    cout << "--------------------------" << endl;
+        1:  407:    avl4.insert(20);
+        1:  408:    avl4.print_tree();
+        1:  409:    cout << "--------------------------" << endl;
+        1:  410:    cout << endl;
+        -:  411:
+        1:  412:    cout << "// Inserting 16" << endl;
+        1:  413:    cout << "--------------------------" << endl;
+        1:  414:    avl4.insert(16);
+        1:  415:    avl4.print_tree();
+        1:  416:    cout << "--------------------------" << endl;
+        1:  417:    cout << endl;
+        -:  418:
+        1:  419:    cout << "// Inserting 17" << endl;
+        1:  420:    cout << "--------------------------" << endl;
+        1:  421:    avl4.insert(17);
+        1:  422:    avl4.print_tree();
+        1:  423:    cout << "--------------------------" << endl;
+        1:  424:    cout << endl;
+        -:  425:
+        1:  426:    cout << "// Inserting 18" << endl;
+        1:  427:    cout << "--------------------------" << endl;
+        1:  428:    avl4.insert(18);
+        1:  429:    avl4.print_tree();
+        1:  430:    cout << "--------------------------" << endl;
+        1:  431:    cout << endl;
+        -:  432:
+        1:  433:    cout << "// Inserting 19" << endl;
+        1:  434:    cout << "--------------------------" << endl;
+        1:  435:    avl4.insert(19);
+        1:  436:    avl4.print_tree();
+        1:  437:    cout << "--------------------------" << endl;
+        1:  438:    cout << endl;
+        -:  439:
+        1:  440:    cout << "// Inserting -23" << endl;
+        1:  441:    cout << "--------------------------" << endl;
+        1:  442:    avl4.insert(-23);
+        1:  443:    avl4.print_tree();
+        1:  444:    cout << "--------------------------" << endl;
+        1:  445:    cout << endl;
+        -:  446:
+        1:  447:    cout << "// Inserting 65" << endl;
+        1:  448:    cout << "--------------------------" << endl;
+        1:  449:    avl4.insert(65);
+        1:  450:    avl4.print_tree();
+        1:  451:    cout << "--------------------------" << endl;
+        1:  452:    cout << endl;
+        -:  453:
+        1:  454:    cout << "// Inserting -2" << endl;
+        1:  455:    cout << "--------------------------" << endl;
+        1:  456:    avl4.insert(-2);
+        1:  457:    avl4.print_tree();
+        1:  458:    cout << "--------------------------" << endl;
+        1:  459:    cout << endl;
+        -:  460:
+        1:  461:    cout << "// Inserting 35" << endl;
+        1:  462:    cout << "--------------------------" << endl;
+        1:  463:    avl4.insert(35);
+        1:  464:    avl4.print_tree();
+        1:  465:    cout << "--------------------------" << endl;
+        1:  466:    cout << endl;
+        -:  467:
+        1:  468:    cout << "// Inserting 0" << endl;
+        1:  469:    cout << "--------------------------" << endl;
+        1:  470:    avl4.insert(0);
+        1:  471:    avl4.print_tree();
+        1:  472:    cout << "--------------------------" << endl;
+        1:  473:    cout << endl;
+        -:  474:
+        1:  475:    cout << "// Inserting -10" << endl;
+        1:  476:    cout << "--------------------------" << endl;
+        1:  477:    avl4.insert(-10);
+        1:  478:    avl4.print_tree();
+        1:  479:    cout << "--------------------------" << endl;
+        1:  480:    cout << endl;
+        -:  481:
+        1:  482:    cout << "// Inserting -15" << endl;
+        1:  483:    cout << "--------------------------" << endl;
+        1:  484:    avl4.insert(-15);
+        1:  485:    avl4.print_tree();
+        1:  486:    cout << "--------------------------" << endl;
+        1:  487:    cout << endl;
+        -:  488:
+        -:  489:
+        -:  490:    // contains in avl4
+        1:  491:    cout << "// Testing avl4 for containing elements:" << endl << endl;
+        -:  492:    
+        1:  493:    cout << "// Testing 35: ";
+        1:  494:    if (avl4.contains(35)) {
+        1:  495:        cout << "avl4 contains 35" << endl;
+        -:  496:    }
+        -:  497:    else{
+    #####:  498:        cout << "avl4 does not contain 35" << endl;
+        -:  499:    }
+        -:  500:
+        1:  501:    cout << "// Testing 76: ";
+        1:  502:    if (avl4.contains(76)) {
+    #####:  503:        cout << "avl4 contains 76" << endl;
+        -:  504:    }
+        -:  505:    else{
+        1:  506:        cout << "avl4 does not contain 76" << endl;
+        -:  507:    }
+        -:  508:    
+        1:  509:    cout << "// Testing 12: ";
+        1:  510:    if (avl4.contains(12)) {
+    #####:  511:        cout << "avl4 contains 12" << endl;
+        -:  512:    }
+        -:  513:    else{
+        1:  514:        cout << "avl4 does not contain 12" << endl;
+        -:  515:    }
+        -:  516:
+        1:  517:    cout << "// Testing 67: ";
+        1:  518:    if (avl4.contains(67)) {
+    #####:  519:        cout << "avl4 contains 67" << endl;
+        -:  520:    }
+        -:  521:    else{
+        1:  522:        cout << "avl4 does not contain 67" << endl;
+        -:  523:    }
+        -:  524:
+        1:  525:    cout << "// Testing 22: ";
+        1:  526:    if (avl4.contains(22)) {
+    #####:  527:        cout << "avl4 contains 22" << endl;
+        -:  528:    }
+        -:  529:    else{
+        1:  530:        cout << "avl4 does not contain 22" << endl;
+        -:  531:    }
+        -:  532:
+        1:  533:    cout << "// Testing 54: ";
+        1:  534:    if (avl4.contains(54)) {
+    #####:  535:        cout << "avl4 contains 54" << endl;
+        -:  536:    }
+        -:  537:    else{
+        1:  538:        cout << "avl4 does not contain 54" << endl;
+        -:  539:    }
+        -:  540:
+        1:  541:    cout << "// Testing 101: ";
+        1:  542:    if (avl4.contains(101)) {
+        1:  543:        cout << "avl4 contains 101" << endl;
+        -:  544:    }
+        -:  545:    else{
+    #####:  546:        cout << "avl4 does not contain 101" << endl;
+        -:  547:    }
+        -:  548:
+        1:  549:    cout << "// Testing -50: ";
+        1:  550:    if (avl4.contains(-50)) {
+    #####:  551:        cout << "avl4 contains -50" << endl;
+        -:  552:    }
+        -:  553:    else{
+        1:  554:        cout << "avl4 does not contain -50" << endl;
+        -:  555:    }
+        -:  556:
+        1:  557:    cout << "// Testing -101: ";
+        1:  558:    if (avl4.contains(-101)) {
+    #####:  559:        cout << "avl4 contains -101" << endl;
+        -:  560:    }
+        -:  561:    else{
+        1:  562:        cout << "avl4 does not contain -101" << endl;
+        -:  563:    }
+        -:  564:
+        1:  565:    cout << "// Testing -12: ";
+        1:  566:    if (avl4.contains(-12)) {
+    #####:  567:        cout << "avl4 contains -12" << endl;
+        -:  568:    }
+        -:  569:    else{
+        1:  570:        cout << "avl4 does not contain -12" << endl;
+        -:  571:    }
+        -:  572:
+        1:  573:    cout << "// Testing -23: ";
+        1:  574:    if (avl4.contains(-23)) {
+        1:  575:        cout << "avl4 contains -23" << endl;
+        -:  576:    }
+        -:  577:    else{
+    #####:  578:        cout << "avl4 does not contain -23" << endl;
+        -:  579:    }
+        -:  580:
+        1:  581:    cout << "// Testing 65: ";
+        1:  582:    if (avl4.contains(65)) {
+        1:  583:        cout << "avl4 contains 65" << endl;
+        -:  584:    }
+        -:  585:    else{
+    #####:  586:        cout << "avl4 does not contain 65" << endl;
+        -:  587:    }
+        -:  588:
+        1:  589:    cout << "// Testing 21: ";
+        1:  590:    if (avl4.contains(21)) {
+    #####:  591:        cout << "avl4 contains 21" << endl;
+        -:  592:    }
+        -:  593:    else{
+        1:  594:        cout << "avl4 does not contain 21" << endl;
+        -:  595:    }
+        -:  596:
+        1:  597:    cout << endl << endl;
+        -:  598:
+        -:  599:
+        -:  600:
+        -:  601:
+        -:  602:
+        -:  603:    //----------------------------------
+        -:  604:    //
+        -:  605:    // TEST NUMBER 5
+        -:  606:    // Purpose: Test default constructor, 
+        -:  607:    // insert, find_min, and find_max. Print 
+        -:  608:    // out each step of inserting.
+        -:  609:    //
+        -:  610:    //----------------------------------
+        -:  611:
+        1:  612:    cout << endl << "//----------------------------------" << endl << "//" << endl;
+        1:  613:    cout << "// TEST NUMBER 5" << endl;
+        1:  614:    cout << "// Purpose: Test default constructor," << endl << "// insert, find_min, and find_max. Print";
+        1:  615:    cout << endl << "// out each step of inserting." << endl <<"//" << endl;
+        1:  616:    cout << "//----------------------------------" << endl << endl;
+        -:  617:
+        -:  618:
+        2:  619:    AVLTree<int> avl5;
+        -:  620:
+        1:  621:    cout << "// Inserting 19" << endl;
+        1:  622:    cout << "--------------------------" << endl;
+        1:  623:    avl5.insert(19);
+        1:  624:    avl5.print_tree();
+        1:  625:    cout << "--------------------------" << endl;
+        1:  626:    cout << endl;
+        -:  627:
+        1:  628:    cout << "// Inserting 48" << endl;
+        1:  629:    cout << "--------------------------" << endl;
+        1:  630:    avl5.insert(48);
+        1:  631:    avl5.print_tree();
+        1:  632:    cout << "--------------------------" << endl;
+        1:  633:    cout << endl;
+        -:  634:
+        1:  635:    cout << "// Inserting 16" << endl;
+        1:  636:    cout << "--------------------------" << endl;
+        1:  637:    avl5.insert(16);
+        1:  638:    avl5.print_tree();
+        1:  639:    cout << "--------------------------" << endl;
+        1:  640:    cout << endl;
+        -:  641:
+        1:  642:    cout << "// Inserting 99" << endl;
+        1:  643:    cout << "--------------------------" << endl;
+        1:  644:    avl5.insert(99);
+        1:  645:    avl5.print_tree();
+        1:  646:    cout << "--------------------------" << endl;
+        1:  647:    cout << endl;
+        -:  648:
+        1:  649:    cout << "// Inserting 1" << endl;
+        1:  650:    cout << "--------------------------" << endl;
+        1:  651:    avl5.insert(1);
+        1:  652:    avl5.print_tree();
+        1:  653:    cout << "--------------------------" << endl;
+        1:  654:    cout << endl;
+        -:  655:
+        1:  656:    cout << "// Inserting 5" << endl;
+        1:  657:    cout << "--------------------------" << endl;
+        1:  658:    avl5.insert(5);
+        1:  659:    avl5.print_tree();
+        1:  660:    cout << "--------------------------" << endl;
+        1:  661:    cout << endl;
+        -:  662:
+        1:  663:    cout << "// Inserting 65" << endl;
+        1:  664:    cout << "--------------------------" << endl;
+        1:  665:    avl5.insert(65);
+        1:  666:    avl5.print_tree();
+        1:  667:    cout << "--------------------------" << endl;
+        1:  668:    cout << endl;
+        -:  669:
+        1:  670:    cout << "// Inserting 21" << endl;
+        1:  671:    cout << "--------------------------" << endl;
+        1:  672:    avl5.insert(21);
+        1:  673:    avl5.print_tree();
+        1:  674:    cout << "--------------------------" << endl;
+        1:  675:    cout << endl;
+        -:  676:
+        1:  677:    cout << "// Inserting 0" << endl;
+        1:  678:    cout << "--------------------------" << endl;
+        1:  679:    avl5.insert(0);
+        1:  680:    avl5.print_tree();
+        1:  681:    cout << "--------------------------" << endl;
+        1:  682:    cout << endl;
+        -:  683:
+        1:  684:    cout << "// Inserting -10" << endl;
+        1:  685:    cout << "--------------------------" << endl;
+        1:  686:    avl5.insert(-10);
+        1:  687:    avl5.print_tree();
+        1:  688:    cout << "--------------------------" << endl;
+        1:  689:    cout << endl;
+        -:  690:
+        1:  691:    cout << "// Inserting -15" << endl;
+        1:  692:    cout << "--------------------------" << endl;
+        1:  693:    avl5.insert(-15);
+        1:  694:    avl5.print_tree();
+        1:  695:    cout << "--------------------------" << endl;
+        1:  696:    cout << endl;
+        -:  697:
+        -:  698:
+        -:  699:    // test min and max
+        1:  700:    cout << "// Minimum value of avl1: ";
+        1:  701:    cout << avl1.find_min() << endl;
+        1:  702:    cout << "// Maximum value of avl1: ";
+        1:  703:    cout << avl1.find_max() << endl;
+        -:  704:    
+        -:  705:
+        -:  706:    try {
+        1:  707:        cout << "// Minimum value of avl2: ";
+       1*:  708:        cout << avl2.find_min() << endl;
+        -:  709:        
+        -:  710:    }
+        2:  711:    catch(std::invalid_argument& e) {
+        1:  712:        cout << e.what() << endl;
+        -:  713:    }
+        -:  714:    
+        -:  715:    try{
+        1:  716:        cout << "// Maximum value of avl2: ";
+       1*:  717:        cout << avl2.find_max() << endl;
+    #####:  718:        cout << endl;
+        -:  719:    }
+        2:  720:    catch(std::invalid_argument& e) {
+        1:  721:        cout << e.what() << endl;
+        -:  722:    }
+        -:  723:
+        1:  724:    cout << "// Minimum value of avl3: ";
+        1:  725:    cout << avl3.find_min() << endl;
+        1:  726:    cout << "// Maximum value of avl3: ";
+        1:  727:    cout << avl3.find_max() << endl;
+        -:  728:    
+        -:  729:
+        1:  730:    cout << "// Minimum value of avl4: ";
+        1:  731:    cout << avl4.find_min() << endl;
+        1:  732:    cout << "// Maximum value of avl4: ";
+        1:  733:    cout << avl4.find_max() << endl;
+        -:  734:    
+        -:  735:
+        1:  736:    cout << "// Minimum value of avl5: ";
+        1:  737:    cout << avl5.find_min() << endl;
+        1:  738:    cout << "// Maximum value of avl5: ";
+        1:  739:    cout << avl5.find_max() << endl;
+        1:  740:    cout << endl << endl;
+        -:  741:
+        1:  742:    avl1.make_empty();
+        -:  743:
+        -:  744:    // Testing make empty and is empty
+        -:  745:
+        1:  746:    if (avl1.is_empty()) {
+        1:  747:        cout << "// avl1 is empty" << endl;
+        -:  748:    }
+        -:  749:    else{
+    #####:  750:        cout << "// avl1 is not empty" << endl;
+        -:  751:    }
+        -:  752:
+        1:  753:    if (avl2.is_empty()) {
+        1:  754:        cout << "// avl2 is empty" << endl;
+        -:  755:    }
+        -:  756:    else{
+    #####:  757:        cout << "// avl2 is not empty" << endl;
+        -:  758:    }
+        -:  759:
+        1:  760:    if (avl3.is_empty()) {
+    #####:  761:        cout << "// avl3 is empty" << endl;
+        -:  762:    }
+        -:  763:    else{
+        1:  764:        cout << "// avl3 is not empty" << endl;
+        -:  765:    }
+        -:  766:
+        1:  767:    if (avl4.is_empty()) {
+    #####:  768:        cout << "// avl4 is empty" << endl;
+        -:  769:    }
+        -:  770:    else{
+        1:  771:        cout << "// avl4 is not empty" << endl;
+        -:  772:    }
+        -:  773:
+        1:  774:    if (avl5.is_empty()) {
+    #####:  775:        cout << "// avl5 is empty" << endl;
+        -:  776:    }
+        -:  777:    else{
+        1:  778:        cout << "// avl5 is not empty" << endl;
+        -:  779:    }
+        -:  780:
+        1:  781:    cout << endl << endl;
+        -:  782:
+        -:  783:
+        -:  784:   
+        1:  785:}
